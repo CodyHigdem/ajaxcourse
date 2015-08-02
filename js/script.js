@@ -32,7 +32,18 @@ function loadData() {
     //parse
     //console.log it, use <li>
     $.getJSON( nytURL, function( data ) {
-        console.log(data);
+        //from udacity
+        $nytHeaderElem.text('New York Times Articles About ' + city);
+        console.log(data.response.docs);
+        articles = data.response.docs;
+
+        for (var i = 0; i < articles.length; i++) {
+            var article = articles[i];
+            $nytElem.append('<li> <a href="' + article.web_url + '">' + article.headline.main + '</a><p>' + article.snippet + '</p></li>');
+        };
+
+  }).error(function(e){
+    $nytElem.text('New York Time Articles could not be loaded.');
   });
 
 
