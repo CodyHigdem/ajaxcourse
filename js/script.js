@@ -23,6 +23,21 @@ function loadData() {
     //from udacity course, look at the append it's a body spot woot
     $body.append('<img class="bgimg" src="'+ streetView +'">');
 
+    //NYT AJAX request now
+    //New York Times API Key that I had to register for
+    var NYTArticleAPIKey = '000173a466a102376321f0305ae688ad:0:72602592';
+    //MAKE A URL VAR
+    var nytURL = 'http://api.nytimes.com/svc/search/v2/articlesearch.json?q=' + city + '&sort=newest&api-key=' + NYTArticleAPIKey;
+    //$.getJSON();
+    //parse
+    //console.log it, use <li>
+    $.getJSON( nytURL, function( data ) {
+        console.log(data);
+  });
+
+
+
+
     return false;
 };
 
