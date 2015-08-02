@@ -46,6 +46,30 @@ function loadData() {
     $nytElem.text('New York Time Articles could not be loaded.');
   });
 
+  //wikipedia api
+  // Use .ajax(); url, datatype, no success function parameter so set it to a function that you want to run, <ul id="wikipedia-links"></ul>
+
+  //Make a url var
+  var wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + city + '&format=json&callback=wikiCallback';
+
+  $.ajax({
+    url: wikiURL,
+    dataType: 'jsonp',
+    //make the call back function
+    success: function( response){
+        console.log(response[0]);
+
+        var articleList= response[1];
+
+        for (var i = 0; i < articleList.length; i++){
+            articleStr = articleList[i];
+            var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+            $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+        };
+    }
+  })
+
+
 
 
 
